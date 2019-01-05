@@ -1,0 +1,14 @@
+<div class="col-md" *ngIf="weather">
+  <div class="card">
+    <img class="card-img-top" src="http://openweathermap.org/img/w/{{ weather?.icon }}.png" />
+    <div class="card-body">
+      <h5 class="class-title">{{ weather?.name }}</h5>
+      <h6 class="class-title">{{ weather?.dt | date:'short' }}</h6>
+      <p class="card-text d-flex flex-row justify-content-between">Temperature: <span class="badge badge-secondary">{{ weather?.temp }}  &deg;C</span></p>
+      <p class="card-text d-flex flex-row justify-content-between">Pressure: <span class="badge badge-secondary">{{ weather?.pressure }}</span></p>
+      <p class="card-text d-flex flex-row justify-content-between">Humidity: <span class="badge badge-secondary">{{ weather?.humidity }}</span></p>
+      <p class="card-text d-flex flex-row justify-content-between">Min. temperature: <span class="badge badge-secondary">{{ weather?.temp_min }}  &deg;C</span></p>
+      <p class="card-text d-flex flex-row justify-content-between">Max. temperature: <span class="badge badge-secondary">{{ weather?.temp_max }}  &deg;C</span></p>
+    </div>
+  </div>
+</div>

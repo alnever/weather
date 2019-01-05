@@ -1,0 +1,4 @@
+<div class="d-flex flex-row content-justify-between search-form">
+  <input type="text" placeholder="City name" [(ngModel)]="cityName" (keyup.enter)="searchByCityName()" />
+  <a class="btn btn-secondary" (click)="searchByCityName()">Find</a>
+</div>
