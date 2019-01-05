@@ -1,6 +1,8 @@
 # Weather
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 7.1.4.
+The project is powered by [Bootstrap](https://getbootstrap.com/) and [CanvasJS](https://canvasjs.com/)
+Also it uses [OpenWeatherMap API](https://openweathermap.org/)
 
 ## Development server
 
