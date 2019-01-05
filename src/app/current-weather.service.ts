@@ -4,6 +4,8 @@ import { catchError, tap, map } from 'rxjs/operators';
 import { BehaviorSubject } from 'rxjs';
 
 import { Weather } from './weather';
+import { UserLocation } from './user-location';
+import { BaseConstService } from './base-const.service';
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json'})
@@ -14,17 +16,21 @@ const httpOptions = {
 })
 export class CurrentWeatherService {
 
-  // request parameters
+  // request url
   private url:string = 'http://api.openweathermap.org/data/2.5/weather';
-  private key:string = 'd5bb2bd186d0447a80000f7dbf63c601';
 
   // make a request result a BehaviorSubject to support
   // reactive changes of the components demonstrating search results
   private weather = new BehaviorSubject(null);
 
-  // inject HttpClient service
+  /**
+  * Inject necessary services
+  * @param http: HttpClient - to request api
+  * @param baseConst: BaseConstService - to get common parameters
+  */
   constructor(
-    private http: HttpClient
+    private http: HttpClient,
+    private baseConst: BaseConstService
   ) { }
 
   // function to return search results
@@ -32,19 +38,18 @@ export class CurrentWeatherService {
     return this.weather.asObservable();
   }
 
-  // Find a weather for the city selected by user
-  // @param city: string - the name of the city
-  //
-  // after obtaining data saves them into the weather variable
-  public searchWeather(city: string) {
+  /**
+  * Find a weather for the city selected by user
+  * @param searchParams - a set of query params
+  *
+  * after obtaining data saves them into the weather variable
+  */
+  private searchWeather(searchParams) {
+    // if city is empty (initial condition), then find it by coordinates
     this.http.get(
       this.url,
       {
-          params: {
-          'q': city,
-          'units': 'metric',
-          'appid': this.key
-        }
+          params: searchParams
       }
     )
     .pipe(
@@ -62,5 +67,37 @@ export class CurrentWeatherService {
       map(response => response as Weather)
     )
     .subscribe(response => this.weather.next(response));
+  }
+
+  /**
+  * Provides search by city name
+  *
+  * @param city: string - city name
+  */
+
+  public searchByCityName(city: string) {
+    this.searchWeather(
+      {
+      'q': city,
+      'units': 'metric',
+      'appid': this.baseConst.getWeatherKey()
+      }
+    );
+  }
+
+  /**
+  * Provides search by coordinates of the current location of user
+  *
+  * @param coords: UserLocation - lat-n-lon of current user
+  */
+  public searchByCoords(coords: UserLocation) {
+    this.searchWeather(
+      {
+      'lat': coords.lat,
+      'lon': coords.lon,
+      'units': 'metric',
+      'appid': this.baseConst.getWeatherKey()
+      }
+    );
   }
 }
