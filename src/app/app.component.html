@@ -10,7 +10,26 @@
       <app-current-weather></app-current-weather>
     </div>
     <div class="col-8">
-      <app-forecast-weather></app-forecast-weather>
+      <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <ul class="navbar-nav">
+          <li class="navbar-item">
+            <a routerLink="/temp" routerLinkActive="active" class="nav-link">Temperaure</a>
+          </li>
+          <li class="navbar-item">
+            <a routerLink="/temp_min" routerLinkActive="active" class="nav-link">Min.Temperaure</a>
+          </li>
+          <li class="navbar-item">
+            <a routerLink="/temp_max" routerLinkActive="active" class="nav-link">Max.Temperaure</a>
+          </li>
+          <li class="navbar-item">
+            <a routerLink="/pressure" routerLinkActive="active" class="nav-link">Pressure</a>
+          </li>
+          <li class="navbar-item">
+            <a routerLink="/humidity" routerLinkActive="active" class="nav-link">Humidity</a>
+          </li>
+        </ul>
+      </nav>
+      <router-outlet></router-outlet>
     </div>
   </div>
 </div>

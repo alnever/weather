@@ -7,6 +7,7 @@ import { AppComponent } from './app.component';
 import { CurrentWeatherComponent } from './current-weather/current-weather.component';
 import { CitySearchComponent } from './city-search/city-search.component';
 import { ForecastWeatherComponent } from './forecast-weather/forecast-weather.component';
+import { AppRoutingModule } from './app-routing.module';
 
 @NgModule({
   declarations: [
@@ -19,6 +20,7 @@ import { ForecastWeatherComponent } from './forecast-weather/forecast-weather.co
     BrowserModule,
     HttpClientModule,
     FormsModule,
+    AppRoutingModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
