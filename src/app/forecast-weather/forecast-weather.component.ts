@@ -125,7 +125,7 @@ export class ForecastWeatherComponent implements OnInit {
   * Returns line color according the route
   */
 
-  private getLineColor(): number {
+  private getLineColor(): string {
     switch (this.currentRoute) {
       case '':
       case 'temp': {
